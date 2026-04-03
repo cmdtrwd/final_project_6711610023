@@ -1,0 +1,383 @@
+@use "variables";
+@use "function";
+
+// Header & Navbar
+header {
+  background: #000000;
+  padding: function.spacing(2) 0;
+  border-bottom: 2px solid variables.$primary-cyan;
+  position: sticky;  // ทำให้ header ติดอยู่ด้านบนเมื่อเลื่อน
+  top: 0;
+  z-index: 1000;
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: variables.$primary-cyan;
+    letter-spacing: 2px;
+  }
+
+  .bars {
+    font-size: 30px;
+    color: variables.$primary-cyan;
+    cursor: pointer;
+  }
+
+  // โค้ดมือถือตั้งต้น (Mobile First)
+  .nav-bar {
+    position: absolute; 
+    top: 100%; 
+    right: -100%;
+    background: variables.$bg-dark;
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: function.spacing(3);
+    transition: 0.4s;
+    border-left: 1px solid variables.$primary-cyan;
+    z-index: 1001;
+
+  
+    &.active {
+      right: 0; 
+    }
+
+    a {
+      padding: function.spacing(2) 0;
+      font-size: 18px;
+      border-bottom: 1px solid variables.$secondary-blue;
+      font-weight: bold;
+      transition: 0.3s;
+
+      &:hover {
+        color: variables.$primary-cyan;
+      }
+    }
+  }
+}
+
+// Hero Section (เต็มจอโดยใช้แท็ก <img> + สีดำโปร่งแสงทับ)
+.hero {
+  height: 100vh;
+  position: relative; 
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: function.spacing(2);
+
+  // เลเยอร์ใหม่! ใช้สีดำล้วน + opacity ทับรูป
+  &::after { 
+    content: ""; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000; // สีดำล้วน
+    opacity: 0.6; // ปรับความมืดสว่างตรงนี้ (ค่าน้อย = สว่าง, ค่ามาก = มืด)
+    z-index: 2; // อยู่หน้ารูป
+  }
+
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: 1; 
+  }
+
+  .hero-content {
+    position: relative; 
+    z-index: 3; // ลอยอยู่หน้าสุด (หน้าเลเยอร์ opacity)
+
+    h1 {
+      font-size: 3rem;
+      color: variables.$text-light;
+      letter-spacing: 5px;
+      margin-bottom: function.spacing(2);
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: variables.$primary-cyan;
+      margin-bottom: function.spacing(3);
+    }
+  }
+}
+
+// Grid พื้นฐาน 1fr แบบมือถือ
+.section-title {
+  color: variables.$primary-cyan;
+  text-align: center;
+  margin-top: function.spacing(5);
+  margin-bottom: function.spacing(3);
+  font-size: 2rem;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: function.spacing(3);
+  padding-bottom: function.spacing(5);
+}
+
+// Layout สำหรับหน้าอธิบาย (layout2.html)
+.article-box {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: function.spacing(3);
+  margin-bottom: function.spacing(5);
+  background: rgba(0, 95, 115, 0.1); 
+  border: 1px solid variables.$secondary-blue;
+  border-radius: variables.$radius;
+  padding: function.spacing(2);
+
+  img {
+    border-radius: variables.$radius;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .article-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h3 {
+      color: variables.$primary-cyan;
+      font-size: 1.8rem;
+      margin-bottom: function.spacing(1);
+    }
+
+    p {
+      color: variables.$text-light;
+      margin-bottom: function.spacing(1);
+    }
+  }
+}
+
+// Footer
+footer {
+  background: #000000;
+  padding: function.spacing(5) 0;
+  border-top: 2px solid variables.$secondary-blue;
+  margin-top: function.spacing(5);
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: function.spacing(3);
+  }
+
+  .footer-col h3 {
+    color: variables.$primary-cyan;
+    margin-bottom: function.spacing(1);
+  }
+
+  .footer-col p {
+    color: variables.$text-mute;
+    margin-bottom: function.spacing(1);
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: function.spacing(4);
+    padding-top: function.spacing(2);
+    border-top: 1px solid variables.$secondary-blue;
+    color: variables.$text-mute;
+    font-size: 14px;
+  }
+}
+
+// ===== TIMELINE (Mobile First) =====
+
+// กล่องใหญ่ครอบทุกอย่าง
+.timeline {
+  position: relative;
+  padding: function.spacing(3) 0 function.spacing(5);  //top left/right bottom
+  margin-bottom: function.spacing(5);
+}
+
+// เส้นตรงแนวตั้ง — มือถือ: ชิดซ้าย
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 0;                     //ยืด
+  bottom: 0;                  //ยืด
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    variables.$secondary-blue 10%,
+    variables.$primary-cyan 50%,
+    variables.$secondary-blue 90%,
+    transparent
+  );
+}
+
+// แต่ละเหตุการณ์ — มือถือ: เต็มความกว้าง ชิดซ้าย
+.timeline-item {
+  position: relative;
+  width: 100%;
+  padding-left: function.spacing(5);
+  text-align: left;
+  margin-bottom: function.spacing(4);
+}
+
+// วงกลมบนเส้น
+.timeline-dot {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: variables.$secondary-blue;
+  border: 2px solid variables.$primary-cyan;
+  z-index: 1;
+}
+
+// วงกลมของเหตุการณ์ปัจจุบัน
+.timeline-dot.active {
+  background: variables.$primary-cyan;
+  box-shadow: 0 0 10px variables.$primary-cyan, 0 0 20px variables.$primary-cyan;
+}
+
+// กล่องข้อความ
+.timeline-content {
+  background: rgba(0, 95, 115, 0.12);
+  border: 1px solid variables.$secondary-blue;
+  border-radius: variables.$radius;
+  padding: function.spacing(2) function.spacing(3);
+  transition: 0.3s;
+}
+
+// กล่องข้อความเมื่อเมาส์ชี้
+.timeline-content:hover {
+  border-color: variables.$primary-cyan;
+  box-shadow: 0 0 15px rgba(0, 174, 193, 0.15);
+}
+
+// กล่องข้อความของเหตุการณ์ปัจจุบัน
+.timeline-content.active {
+  border-color: variables.$primary-cyan;
+}
+
+// หัวข้อในกล่อง
+.timeline-content h3 {
+  color: variables.$primary-cyan;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-bottom: function.spacing(1);
+}
+
+// ข้อความในกล่อง
+.timeline-content p {
+  color: variables.$text-light;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+// ปีของเหตุการณ์
+.timeline-year {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: variables.$primary-cyan;
+  letter-spacing: 2px;
+  margin-bottom: function.spacing(1);
+  opacity: 0.8;
+}
+
+// โค้ดส่วนนี้อยู่ล่างสุด จะทำหน้าที่เขียนทับโค้ดด้านบนเสมอเมื่อเปิดในคอมพิวเตอร์
+@media (min-width: 768px) {
+  header {
+    .bars {
+      display: none; // ซ่อน hamburger ในคอม
+    }
+    
+    .nav-bar {
+      position: static;
+      flex-direction: row;
+      width: auto;
+      height: auto;
+      background: transparent;
+      border: none;
+      padding: 0;
+      
+      a {
+        border: none;
+        margin-left: function.spacing(4);
+        padding: 0;
+      }
+    }
+  }
+
+  .hero .hero-content h1 {
+    font-size: 5rem;
+  }
+
+  // ปรับเป็น 1fr 1fr 1fr ในหน้าจอคอม
+  .grid-layout {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  // คอมพิวเตอร์ให้แบ่งเป็น 2 ฝั่ง ซ้ายรูป ขวาตัวหนังสือ
+  .article-box {
+    grid-template-columns: 1fr 1fr;
+    padding: function.spacing(4);
+  }
+
+  footer .footer-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  // คอม: เส้นกลาง item สลับซ้าย-ขวา
+  .timeline::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    width: 45%;
+    padding-left: 0;
+  }
+
+  .timeline-item.timeline-left {
+    left: 0;
+    text-align: right;
+  }
+
+  .timeline-item.timeline-left .timeline-dot {
+    left: auto;
+    right: -7%;
+  }
+
+  .timeline-item.timeline-right {
+    left: 55%;
+    text-align: left;
+  }
+
+  .timeline-item.timeline-right .timeline-dot {
+    left: -7%;
+    right: auto;
+  }
+
+  .timeline-dot {
+    left: auto;
+    transform: translateX(-50%);
+  }
+}

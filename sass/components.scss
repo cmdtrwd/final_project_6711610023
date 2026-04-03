@@ -1,0 +1,60 @@
+@use "variables";
+@use "function";
+@use "mixins";
+
+.btn-cyan {
+  @include mixins.btn-style;
+  padding: function.spacing(1) function.spacing(3);
+  font-weight: bold;
+  font-family: variables.$font-main;
+
+  &:hover {
+    background: variables.$primary-cyan;
+    color: variables.$bg-dark;
+    box-shadow: 0 0 10px variables.$primary-cyan;  //เเนวนอน เเนวตั้ง ความฟุ้งกระจาย
+  }
+}
+
+.card-tech {
+  @include mixins.card-style;
+  padding: function.spacing(2);
+  display: flex; 
+  flex-direction: column; 
+  height: 100%; 
+
+  h3 {
+    color: variables.$primary-cyan;
+    margin-top: function.spacing(1);
+    margin-bottom: function.spacing(1);
+  }
+
+  p {
+    color: variables.$text-mute;
+    margin-bottom: function.spacing(2);
+  }
+
+  img {
+    border-radius: variables.$radius;
+    opacity: 0.8;
+    transition: 0.3s;
+    height: 200px; 
+    object-fit: cover; 
+  }
+
+  .btn-cyan {
+    width: 100%;
+    text-align: center;
+    margin-top: auto; 
+    // ลบ margin-top ออกแล้วใช้ margin-top: auto; เพื่อดันปุ่มลงด้านล่างสุดของการ์ด
+  }
+
+  &:hover {
+    border-color: variables.$primary-cyan;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    transform: translateY(-5px);
+
+    img {
+      opacity: 1;
+    }
+  }
+}

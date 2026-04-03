@@ -1,0 +1,36 @@
+@use "variables";
+@use "function";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: variables.$bg-dark;
+  color: variables.$text-light;
+  font-family: variables.$font-main;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit; // ใช้สีเดียวกับกล่องข้อความที่มันอยู่
+}
+
+ul {
+  list-style: none; // ลบจุดหน้า li
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 function.spacing(2);
+}

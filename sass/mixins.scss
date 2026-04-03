@@ -1,0 +1,19 @@
+@use "variables";
+
+// โค้ดเบสิคสำหรับจัดกลุ่มสไตล์ที่ใช้บ่อย
+@mixin card-style {
+  background: rgba(0, 95, 115, 0.1);
+  border: 1px solid variables.$secondary-blue;
+  border-radius: variables.$radius;
+  transition: 0.3s;
+}
+
+@mixin btn-style {
+  background: transparent;
+  color: variables.$primary-cyan;
+  border: 1px solid variables.$primary-cyan;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+  border-radius: variables.$radius;
+}

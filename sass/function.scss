@@ -1,0 +1,4 @@
+// สูตรคำนวณ Padding/Margin (1 = 10px, 2 = 20px)
+@function spacing($num) {
+  @return $num * 10px;
+}
